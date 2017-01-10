@@ -1,0 +1,21 @@
+	-GERECONT S.A	-
+
+	-----FACT ELECT-----
+Pedido:	{{pedido}}
+Fecha:	{{fecha}}
+
+--------------------------------	-MAX 32 CARACTERES!
+Cant	Articulo	PVP
+ROW
+ROW
+ROW
+ROW
+
+		base0	{{base0}}
+		base12	{{base12}}
+		iva	{{iva}}
+		Total	{{total}}
+
+
+
+---------------------------------
