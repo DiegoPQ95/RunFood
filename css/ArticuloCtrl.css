@@ -1,0 +1,21 @@
+  p.description{
+    margin: 0px !important;
+    word-break: break-all ;
+    white-space: normal;
+  }
+  .thumbnail .caption {
+    padding: 0px !important;
+  }
+
+  .seleccionado{
+    background: #E6B319 !important;
+  }
+
+    .badge-icon i.button{
+      padding: 3px !important;
+    }
+
+    .articuloLista{
+      padding: 1px !important;
+    }
+    

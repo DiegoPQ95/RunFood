@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html ng-app="ArticuloProductoApp">
+<head>
+  <title>RunFood | FoodTrucks under Control</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/flat-admin.css">
+
+  <!-- Theme -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/blue-sky.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/blue.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/red.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/yellow.css">
+  <link rel="stylesheet" type="text/css" href="../css/ArticuloCtrl.css">
+
+</head>
+<body>
+
+<div class="app app-default">
+  <aside class="app-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="sidebar-brand" href="#"><span class="highlight">Run</span> Food</a>
+      <button type="button" class="sidebar-toggle">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+		<div class="sidebar-menu">
+      <ul class="sidebar-nav">
+        <li>
+          <a href="../main.html">
+            <div class="icon">
+              <i class="fa fa-cutlery" aria-hidden="true"></i>
+            </div>
+            <div class="title">Ventas</div>
+          </a>
+        </li>
+        <li >
+            <a href="./arqueoCaja.html">
+              <div class="icon">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              </div>
+              <div class="title">Arqueo de Caja</div>
+            </a>
+        </li>
+        <li class="dropdown active">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <div class="icon">
+              <i class="fa fa-cubes" aria-hidden="true"></i>
+            </div>
+            <div class="title">Inventario</div>
+          </a>
+          <div class="dropdown-menu">
+            <ul>
+              <li class="section"><i class="fa fa-cube" aria-hidden="true"></i> Manejo del Iventario</li>
+              <li class="line"></li>
+              <li><a href="./ajusteInventario.html#/?ajuste=ingreso">Ajuste de Ingreso</a></li>
+              <li><a href="./ajusteInventario.html#/?ajuste=egreso">Ajuste Egreso</a></li>
+              <li class="section"><i class="fa fa-file-o" aria-hidden="true"></i> Articulos</li>
+              <li class="line"></li>
+             <!-- <li><a href="./articulo.html">Articulos</a></li>
+              <li><a href="./articuloProducto.html">Combos</a></li> -->
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <ul class="menu">
+        <li>
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+           Configuracion <i class="fa fa-cogs" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <script type="text/ng-template" id="sidebar-dropdown.tpl.html">
+  <div class="dropdown-background">
+    <div class="bg"></div>
+  </div>
+  <div class="dropdown-container">
+    {{list}}
+  </div>
+</script>
+
+  <div class="app-container" ng-controller="MantenimientoCtrl as frm">
+    <div class="row" >
+      <div  class="col-sm-12">
+        <div class="card ">
+          <div class="card-body">
+            <div class="row">
+              <form class="form">
+              <div class="col-sm-9">
+                <div class="row">
+                <!--DATOS DEL PRODUCTO -->
+                    <div class="form-group col-sm-4">
+                      <input type="text" class="form-control" name="codigo" placeholder="Codigo" ng-model="frm.articuloProducto.codigo">
+                    </div>
+                    <div class="form-group col-sm-8">
+                      <input type="text" class="form-control" name="descripcion" placeholder="Descripcion" ng-model="frm.articuloProducto.descripcion">
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-3">
+                    <input type="text" class="form-control" name="pvp1" ng-model="frm.articuloProducto.pvp1" placeholder="PVP1">
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <input type="text" class="form-control" name="pvp2" ng-model="frm.articuloProducto.pvp2" placeholder="PVP2">
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <input type="text" class="form-control" name="pvp3" ng-model="frm.articuloProducto.pvp3" placeholder="PVP3">
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <input type="text" class="form-control" name="pvp4" ng-model="frm.articuloProducto.pvp4" placeholder="PVP4">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-4">
+                      <div class="checkbox">
+                        <input ng-model="frm.articuloProducto.pagaIva" name="chPagaIva" id="chPagaIva" type="checkbox">
+                        <label for="chPagaIva"> Paga Iva</label>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-8">
+                    <select ng-model="frm.articuloProducto.idLinea" class="form-control" ng-options="item.id as item.descripcion for item in frm.lineas"></select>
+                  </div>
+                </div>
+                <div class="row">
+                <!-- TABLA Y LISTADO DE ARTICULOS -->
+                  <div class="col-sm-6 no-padding">
+                    <div class="table-responsive">
+                      <table class="table card-table">
+                        <thead>
+                          <tr>
+                            <th>Componente</th>
+                            <th>Cant</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="comp in frm.articuloProducto.componentes">
+                      <td class="col-sm-2"><span ng-click="frm.quitarDetalle(comp)" class="badge badge-danger badge-icon"><i class="fa fa-times button" aria-hidden="true"></i></span>{{comp.descripcion}}</td>
+                            <td class="col-sm-1 no-padding"><input class="form-control" ng-model="comp.cantidad" type="number"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 no-padding">
+                    <div class="col-sm-6 articuloLista" ng-repeat="comp in frm.componentes">
+                      <button class="btn btn-default btn-sm"  ng-class="{seleccionado: (comp.cantidad > 0)}" ng-click="frm.agregarDetalle(comp)">
+                        <div class="caption">
+                          <p class="description">{{comp.codigo}}</p>
+                          <p class="description">{{comp.descripcion}}</p>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </form>
+              <div class="col-sm-3">
+                <div class="list-group">
+                  <a href="#" ng-click="frm.cargar(item)"
+                   class="list-group-item" ng-class="{seleccionado: (item == frm.articuloProducto)}" ng-repeat="item in frm.articulosProducto track by item.id">
+                    {{item.codigo}}: {{item.descripcion}}
+                  </a>
+                </div>
+              </div> 
+            </div>
+            <div class="row">
+                <button class="btn btn-success btn-sm" ng-click="frm.guardar()">Guardar</button>
+                <button class="btn btn-danger btn-sm" ng-click="frm.eliminar()">Eliminar</button>
+                <button class="btn btn-default btn-sm" ng-click="frm.nuevo()">Nuevo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="app-footer">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="footer-copyright">
+            Copyright © 2016 Company Co,Ltd.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+  <!--<script type="text/javascript" src="../assets/js/vendor.js"></script>
+  <script type="text/javascript" src="../assets/js/app.js"></script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+<script type="text/javascript" src="../assets/js/angular.min.js"></script>
+<script type="text/javascript" src="../Models/funciones.js"></script>
+<script type="text/javascript" src="../Controllers/articuloProducto.js"></script>
+</body>
+</html>

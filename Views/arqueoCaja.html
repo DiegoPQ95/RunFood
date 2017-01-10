@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html ng-app="FormularioReportes">
+<head>
+  <title>RunFood | FoodTrucks under Control</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="../assets/css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/flat-admin.css">
+
+  <!-- Theme -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/blue-sky.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/blue.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/red.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/theme/yellow.css">
+  <link rel="stylesheet" type="text/css" href="../css/ArticuloCtrl.css">
+  <style>
+     .st-sort-ascent:before{
+        content: '\25B2';
+      }
+
+      .st-sort-descent:before{
+        content: '\25BC';
+      }
+  </style>
+
+</head>
+<body>
+
+<div class="app app-default">
+  <aside class="app-sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="sidebar-brand" href="#"><span class="highlight">Run</span> Food</a>
+      <button type="button" class="sidebar-toggle">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="sidebar-menu">
+      <ul class="sidebar-nav">
+        <li>
+          <a href="../main.html">
+            <div class="icon">
+              <i class="fa fa-cutlery" aria-hidden="true"></i>
+            </div>
+            <div class="title">Ventas</div>
+          </a>
+        </li>
+        <li class="active">
+        <a href="./arqueoCaja.html">
+          <div class="icon">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+          </div>
+          <div class="title">Arqueo de Caja</div>
+        </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <div class="icon">
+              <i class="fa fa-cubes" aria-hidden="true"></i>
+            </div>
+            <div class="title">Inventario</div>
+          </a>
+          <div class="dropdown-menu">
+            <ul>
+              <li class="section"><i class="fa fa-cube" aria-hidden="true"></i> Manejo del Iventario</li>
+              <li class="line"></li>
+              <li><a href="./ajusteInventario.html#/?ajuste=ingreso">Ajuste de Ingreso</a></li>
+              <li><a href="./ajusteInventario.html#/?ajuste=egreso">Ajuste Egreso</a></li>
+              <li class="section"><i class="fa fa-file-o" aria-hidden="true"></i> Articulos</li>
+              <li class="line"></li>
+              <li><a href="./articulo.html">Articulos</a></li>
+              <!--<li><a href="./articuloProducto.html">Platos</a></li>
+              <li><a href="./articuloProducto.html">Combos</a></li> -->
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <ul class="menu">
+        <li>
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+           Configuracion <i class="fa fa-cogs" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+<!--
+  <script type="text/ng-template" id="sidebar-dropdown.tpl.html">
+  <div class="dropdown-background">
+    <div class="bg"></div>
+  </div>
+  <div class="dropdown-container">
+    {{list}}
+  </div>
+</script> -->
+
+  <div class="app-container">
+    <nav class="navbar navbar-default" id="navbar">
+      <div class="container-fluid">
+      <div class="navbar-collapse collapse in">
+        <ul class="nav navbar-nav navbar-mobile">
+          <li>
+            <button type="button" class="sidebar-toggle">
+              <i class="fa fa-bars"></i>
+            </button>
+          </li>
+          <li class="logo">
+            <a class="navbar-brand" href="#"><span class="highlight">Run</span> Food</a>
+          </li>
+          <!--        <li>
+            <button type="button" class="navbar-toggle">
+              <img class="profile-img" src="../assets/images/profile.png">
+            </button>
+          </li>   -->
+        </ul>
+        <ul class="nav navbar-nav navbar-left">
+          <li class="navbar-title">ARQUEO DE CAJA</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+    </nav>
+    <!--
+      <div class="btn-floating" id="help-actions">
+      <div class="btn-bg"></div>
+      <button type="button" class="btn btn-default btn-toggle" data-toggle="toggle" data-target="#help-actions">
+        <i class="icon fa fa-plus"></i>
+        <span class="help-text">Shortcut</span>
+      </button>
+      <div class="toggle-content">
+        <ul class="actions">
+          <li><a href="#">Website</a></li>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Issues</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>R
+    </div>
+    -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" data-ng-controller="cierreCajaCtrl as rpt">
+        <div class="card-header">
+          <div class="col-sm-5">
+            <h3>Cierre de Caja</h3>
+          </div>
+          <div class="col-sm-3">
+            <h3>{{rpt.hoy | date: 'dd/MM/yyyy'}}</h3>
+          </div>
+          <div class="col-sm-3 col-sm-offset-3">
+          <button type="button" class="btn btn-default bnt-sm" data-ng-click="rpt.cargar()">Actualizar</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table  st-table="rpt.tempData" st-safe-src="rpt.data" class="table table-condensed" >
+                  <thead>
+                    <tr>
+                      <th colspan="4">
+                        <div class="input-group">
+                          <input data-st-search="" class="form-control" placeholder="Buscar..." type="search"/>
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th data-st-sort="fechaCreacion">Fecha</th>
+                      <th data-st-sort="formaPago">Forma Pago</th>
+                      <th data-st-sort="razonSocial">Cliente</th>
+                      <th data-st-sort="documento">Doc</th>
+                      <th data-st-sort="numero">#</th>
+                      <th data-st-sort="monto">USD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-ng-repeat="p in rpt.tempData">
+                      <td>{{p.fechaCreacion | date:'dd/mm/yyyy HH:mm:ss'}}</td>
+                      <td>{{p.razonSocial}}</td>
+                      <td>{{p.formaPago}}</td>
+                      <td>{{p.documento}}</td>
+                      <td>{{p.numero | number}}</td>
+                      <td>{{p.monto | currency}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <i class="fa fa-money"></i> {{rpt.efectivo | currency}}
+              <p class="help-block">Efectivo</p>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-credit-card"></i> {{rpt.tarjeta | currency}}
+              <p class="help-block">Tarjeta</p>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-reply-all"></i> {{rpt.deposito | currency}}
+              <p class="help-block">Deposito</p>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-level-down"></i> {{rpt.transf | currency}}
+              <p class="help-block">Transferencia</p>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-database"></i> {{rpt.dineroE | currency}}
+              <p class="help-block">Dinero Electronico</p>
+            </div>
+            <div class="col-sm-2">
+              <i class="fa fa-cc"></i> {{rpt.cheque | currency}}
+              <p class="help-block">Cheque</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3 col-sm-offset-9">
+              <button class="btn btn-success" data-ng-click="rpt.cierre()">Cerrar el dia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <footer class="app-footer">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="footer-copyright">
+              Copyright © 2016 Company Co,Ltd.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+</div>
+</div>
+</div>
+
+  <script type="text/javascript" src="../assets/js/vendor.js"></script>
+  <script type="text/javascript" src="../assets/js/app.js"></script>
+  <script type="text/javascript" src="../assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="../assets/js/smart-table.min.js"></script>
+  <script type="text/javascript" src="../Models/funciones.js"></script>
+  <script type="text/javascript" src="../Controllers/reportes.js"></script>
+
+
+</body>
+</html>

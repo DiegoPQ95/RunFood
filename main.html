@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html ng-app="PedidoApp">
+<head>
+  <title>RunFood | FoodTrucks under Control</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
+width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+  <link rel="stylesheet" type="text/css" href="./assets/css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/flat-admin.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-toggle.min.css">
+
+  <!-- Theme -->
+
+  <link rel="stylesheet" type="text/css" href="./assets/css/theme/blue-sky.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/theme/blue.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/theme/red.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/theme/yellow.css">
+  <link rel="stylesheet" type="text/css" href="./css/ArticuloCtrl.css">
+
+</head>
+<body>
+  <div class="app app-default">
+
+<aside class="app-sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a class="sidebar-brand" href="#"><span class="highlight">Run</span> Food</a>
+    <button type="button" class="sidebar-toggle">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="sidebar-menu">
+    <ul class="sidebar-nav">
+      <li class="active">
+        <a href="./main.html">
+          <div class="icon">
+            <i class="fa fa-cutlery" aria-hidden="true"></i>
+          </div>
+          <div class="title">Ventas</div>
+        </a>
+      </li>
+      <li>
+        <a href="./Views/arqueoCaja.html">
+          <div class="icon">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+          </div>
+          <div class="title">Arqueo de Caja</div>
+        </a>
+      </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <div class="icon">
+              <i class="fa fa-cubes" aria-hidden="true"></i>
+            </div>
+            <div class="title">Inventario</div>
+          </a>
+          <div class="dropdown-menu">
+            <ul>
+              <li class="section"><i class="fa fa-cube" aria-hidden="true"></i> Manejo del Iventario</li>
+              <li class="line"></li>
+              <li><a href="./Views/ajusteInventario.html#/?ajuste=ingreso">Ajuste de Ingreso</a></li>
+              <li><a href="./Views/ajusteInventario.html#/?ajuste=egreso">Ajuste Egreso</a></li>
+              <li class="section"><i class="fa fa-file-o" aria-hidden="true"></i> Articulos</li>
+              <li class="line"></li>
+              <li><a href="./Views/articulo.html">Articulos</a></li>
+              <!--<li><a href="./Views/articuloProducto.html">Platos</a></li> -->
+            </ul>
+          </div>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-footer">
+    <ul class="menu">
+      <li>
+        <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+         Configuracion <i class="fa fa-cogs" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<script type="text/ng-template" id="sidebar-dropdown.tpl.html">
+  <div class="dropdown-background">
+    <div class="bg"></div>
+  </div>
+  <div class="dropdown-container">
+    {{list}}
+  </div>
+</script>
+<div class="app-container"   ng-controller="PedidoCtrl as ctrl">
+  <nav class="navbar navbar-default" id="navbar">
+  <div class="container-fluid">
+    <div class="navbar-collapse collapse in">
+      <ul class="nav navbar-nav navbar-mobile">
+        <li>
+          <button type="button" class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+        </li>
+        <li class="logo">
+          <a class="navbar-brand" href="#"><span class="highlight">Run</span> Food</a>
+        </li>
+<!--        <li>
+          <button type="button" class="navbar-toggle">
+            <img class="profile-img" src="./assets/images/profile.png">
+          </button>
+        </li>   -->
+      </ul>
+      <ul class="nav navbar-nav navbar-left">
+        <li class="navbar-title"><input type="text" class="form-control" data-ng-model="ctrl.ordenante" placeholder="El pedido a nombre de...." ></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown profile">
+          <a href="/html/pages/profile.html" class="dropdown-toggle"  data-toggle="dropdown">
+            <img class="profile-img" src="./assets/images/profile.png">
+            <div class="title">Profile</div>
+          </a>
+          <div class="dropdown-menu">
+            <div class="profile-info">
+              <h4 class="username">Scott White</h4>
+            </div>
+            <ul class="action">
+              <li>
+                <a href="#">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="badge badge-danger pull-right">5</span>
+                  My Inbox
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Setting
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--
+  <div class="btn-floating" id="help-actions">
+  <div class="btn-bg"></div>
+  <button type="button" class="btn btn-default btn-toggle" data-toggle="toggle" data-target="#help-actions">
+    <i class="icon fa fa-plus"></i>
+    <span class="help-text">Shortcut</span>
+  </button>
+  <div class="toggle-content">
+    <ul class="actions">
+      <li><a href="#">Website</a></li>
+      <li><a href="#">Documentation</a></li>
+      <li><a href="#">Issues</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </div>R
+</div>
+-->
+    <div class="row">
+      <div  class="col-sm-6">
+        <div class="card card-tab card-mini">
+          <div class="card-header">
+            <ul class="nav nav-tabs nav-justified">
+              <li role="tab{{item.id}}" ng-class="{active: ctrl.lineasArticulos[0] == item}" ng-repeat="item in ctrl.lineasArticulos">
+                <a href="#tab{{item.id}}" aria-controls="tab{{item.id}}" role="tab" data-toggle="tab" aria-expanded="false">{{item.descripcion}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body tab-content no-padding">
+            <div role="tabpanel" class="tab-pane" ng-class="{active: ctrl.lineasArticulos[0] == linea}" id="tab{{linea.id}}"  ng-repeat="linea in ctrl.lineasArticulos">
+              <div class="row">
+                <div class="col-xs-4 col-sm-4 articuloLista" ng-repeat="art in linea.articulos">
+                  <button class="btn btn-default btn-xs"  ng-class="{seleccionado: (art.cantidad > 0)}" ng-mousedown="ctrl.press(art)" ng-mouseup="ctrl.unPress(art)">
+                    <div class="caption">
+                      <p class="description">{{art.descripcion}}</p>
+                      <p class="description"> <strong>{{art.cantidad}}</strong></p>
+                      <p class="description">{{art.pvp() | currency}}  ({{art.pvpSeleccionado}})</strong></p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar articulos...." aria-describedby="buscarArticulos" value="">
+                    <span class="input-group-addon" id="buscarArticulos">
+                    <i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+              <div class="card-action">
+              <button type="button" class="btn btn-success btn-xs" ng-click="ctrl.guardar()"><i class="fa fa-print"></i></button>
+              </div>
+              <div class="card-title text-center">PEDIDO # {{ctrl.numero}}</div>
+              <div class="card-action"  ng-click="ctrl.limpiar_click()">
+              <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-eraser"></i></button>
+              </div>
+            </div>
+            <div class="card-body no-padding">
+              <div class="table-responsive">
+                <table class="table card-table">
+                  <thead>
+                    <tr>
+                      <th>Articulo</th>
+                      <th>Cant</th>
+                      <th>PVP</th>
+                      <!--<th>Costo</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="art in ctrl.detalle">
+                      <td class="col-sm-5"><span ng-click="ctrl.quitarDetalle(art)" class="badge badge-danger badge-icon"><i class="fa fa-times button" aria-hidden="true"></i></span>
+                      {{art.descripcion}}</td>
+                      <td class="col-sm-4 no-padding">
+                      <div class="input-group">
+                        <input ng-change="ctrl.cantidadCambiada(art, event)" class="form-control" type="number" ng-model="art.cantidad">
+                        <span class="input-group-btn">
+                          <button class="btn btn-danger btn-xs" type="button" ng-click="ctrl.restarDetalle(art)"><strong>-</strong></button>
+                        </span>
+                      </div>
+                      </td>
+                      <td class="col-sm-3">{{art.subtotal() + art.subtotalIva() | currency}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <p>Base 0%:{{ctrl.base0 | currency}}</p>
+              <p>Base IVA:{{ctrl.baseIva | currency}}</p>
+              <p>IVA:{{ctrl.iva | currency}}</p>
+              <h4>TOTAL:{{ctrl.total | currency}}</h4>
+            </div>
+        </div>
+      </div>
+      <div frm-pago ></div>
+      <div frm-imprimir ></div>
+      <footer class="app-footer">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="footer-copyright">
+              Copyright © 2016 Company Co,Ltd.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+</div>
+
+  </div>
+
+  <script type="text/javascript" src="./cordova.js"></script>
+  <script type="text/javascript" src="./assets/js/vendor.js"></script>
+  <script type="text/javascript" src="./assets/js/app.js"></script>
+  <script type="text/javascript" src="./assets/js/bootstrap-toggle.min.js"></script>
+  <script type="text/javascript" src="./assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="./Models/funciones.js"></script>
+  <script type="text/javascript" src="./Controllers/pedido.js"></script>
+  <script type="text/javascript" src="./Controllers/frmPago.js"></script>
+  <script type="text/javascript" src="./Controllers/frmImprimir.js"></script>
+</body>
+</html>
